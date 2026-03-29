@@ -3,28 +3,25 @@
 //
 
 #include "io.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include "waveform.h"
 
-/*
- *    char fname[250];
+WaveformData *loadFileData(char *fName, int *count)
+{
+    char fname[256];
     const FILE *file;
-/*File input
-*       printf("Please enter file location...       ('99' to exit)\n");
-*printf(">>");
-fgets(fname, sizeof(fname), stdin);
-/*File Safety Check
-        if (file ==  NULL)
-        {
-            printf("Error opening file\n");
-        }
-        else if (!strcmp(fname, "99"))
-        {
-            exit = true;
-        }
-        else
-        {
-            /*IO HANDLING*/
-        }
 
+    /*--------------FILE INPUT--------------*/
+    printf("Please enter file location: \n");
+    printf(">>");
+    fgets(fname, 256, stdin);
 
+    /*--------------FILE SAFETY CHECK--------------*/
+    if (file == NULL)
+    {
+        printf("Error opening file\n");
+    }
 
-*/
+    return 0;
+}

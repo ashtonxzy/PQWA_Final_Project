@@ -7,13 +7,13 @@
 
 int main(void)
 {
-    /*Variable Declaration*/
+    /* --------------VARIABLES-------------- */
     char choice[2] = "w";
     bool exit = false;
 
     do
     {
-        /* Menu */
+        /* --------------MENU-------------- */
         printf("-----------------------------------------------------------------\n");
         printf(" ____                ___            __        __          \n"
                "|  _ \\ _____      __/ _ \\ _   _  __ \\ \\      / /_ ___   __\n"
@@ -32,7 +32,8 @@ int main(void)
         }
         else
         {
-            /*File handling*/
+            /*--------------FILE HANDLING--------------*/
+
         }
 
     } while (exit == false);
