@@ -26,7 +26,7 @@ int main(void)
 
         printf("Press any key to continue...      ('99' to exit)\n");
         fgets(choice, 3, stdin);
-        if (strcmp(choice, "99") == 0)
+        if (strcmp(choice, "99") == 0) /*Exit condition*/
         {
             exit = true;
         }
