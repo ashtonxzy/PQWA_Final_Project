@@ -33,7 +33,7 @@ int main(void)
         else
         {
             /*--------------FILE HANDLING--------------*/
-
+            loadFileData();
         }
 
     } while (exit == false);
