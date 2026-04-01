@@ -16,4 +16,5 @@ typedef struct
     double thd_percent;
 }WaveformData;
 
+
 #endif //PQWA_FINAL_PROJECT_WAVEFORM_H

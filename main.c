@@ -32,8 +32,14 @@ int main(void)
         }
         else
         {
+            char fname[256] = "";
             /*--------------FILE HANDLING--------------*/
-            loadFileData();
+            printf("Please enter file location:\n");
+            printf(">>");
+            fgets(fname, 100, stdin);
+            fname[strcspn(fname, ".")] = 0; /*Removes \n from end of string*/
+            loadData(fname);
+
         }
 
     } while (exit == false);
