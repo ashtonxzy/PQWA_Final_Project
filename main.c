@@ -37,7 +37,8 @@ int main(void)
             printf("Please enter file location:\n");
             printf(">>");
             fgets(fname, 100, stdin);
-            fname[strcspn(fname, ".")] = 0; /*Removes \n from end of string*/
+            fname[strcspn(fname, "\n")] = 0; /*Removes \n from end of string*/
+            printf("Opening file: %s\n", fname); /*Debug to check if right file is being opened - was having issues*/
             loadData(fname);
 
         }
