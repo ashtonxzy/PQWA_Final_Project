@@ -6,15 +6,9 @@
 
 typedef struct
 {
-    float timestamp;
-    double phase_a_voltage;
-    double phase_b_voltage;
-    double phase_c_voltage;
-    double line_current;
-    double frequency;
-    double power_factor;
-    double thd_percent;
-}WaveformData;
-
+    double rms;
+    double peak2peak;
+    double dcOffset;
+}WaveFormCalculations; //Structure to hold the calculations to return
 
 #endif //PQWA_FINAL_PROJECT_WAVEFORM_H

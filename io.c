@@ -3,8 +3,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "waveform.h"
-
 void loadData(char fname[])
 {
     /*--------------OPENING FILE--------------*/
@@ -29,6 +27,8 @@ void loadData(char fname[])
 
 
     /*--------------STORE CONTENTS IN STRUCTURE--------------*/
+
+    //TODO: CHANGE ARRAY INDEXING FOR POINTER PARSING
     fgets(line, sizeof(line), csvFile);
     int count = 0; /*Loop through rows*/
     while (fgets(line, sizeof(line), csvFile)) /*Loop through contents of file*/
@@ -38,8 +38,9 @@ void loadData(char fname[])
         int col = 0; /*Count columns for structures*/
         while (token != NULL) /*Count skips first line*/
         {
-            switch (col)
+            switch (col) //Case for each column
             {
+                //Store data in each variable in the structure
                 case 0: dataArray[count].timestamp = atof(token); break;;
                 case 1: dataArray[count].phase_a_voltage = atof(token); break;
                 case 2: dataArray[count].phase_b_voltage= atof(token); break;
@@ -56,7 +57,9 @@ void loadData(char fname[])
         count++;
     }
     fclose(csvFile); /*Close the file */
-    for (int j = 0; j < count; j++) {
+    free(dataArray); /*Free the allocated memory*/
+
+/*    for (int j = 0; j < count; j++) {
         printf("%f %f %f %f %f %f %f %f\n",
                dataArray[j].timestamp,
                dataArray[j].phase_a_voltage,
@@ -66,9 +69,5 @@ void loadData(char fname[])
                dataArray[j].frequency,
                dataArray[j].power_factor,
                dataArray[j].thd_percent);
-    }
-    free(dataArray); /*Free the allocated memory*/
-
-
-
+    } */
 }
