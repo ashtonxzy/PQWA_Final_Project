@@ -1,9 +1,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <string.h>
-#include "waveform.h"
-#include "io.h"
-
+#include "../include/io.h"
 
 int main(void)
 {

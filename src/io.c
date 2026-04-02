@@ -1,4 +1,4 @@
-#include "io.h"
+#include "../include/io.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -13,6 +13,8 @@ void loadData(char fname[])
         exit(1);
     }
 
+
+
     /*--------------CREATE STRUCTURE AND ALLOCATE MEMORY--------------*/
     int rowCount = 0;
     char line[256];
@@ -23,7 +25,9 @@ void loadData(char fname[])
         rowCount++; /* Count number of rows to allocate right amount of memory*/
     }
     fseek(csvFile, 0, SEEK_SET); /*Move back to start*/
+
     WaveformData *dataArray = malloc(sizeof(WaveformData) * rowCount); /*Structure to store each line from csv*/
+
 
 
     /*--------------STORE CONTENTS IN STRUCTURE--------------*/
@@ -59,7 +63,9 @@ void loadData(char fname[])
     fclose(csvFile); /*Close the file */
     free(dataArray); /*Free the allocated memory*/
 
-/*    for (int j = 0; j < count; j++) {
+
+    //Print out structure for debugging
+/*; j < count; j++) {
         printf("%f %f %f %f %f %f %f %f\n",
                dataArray[j].timestamp,
                dataArray[j].phase_a_voltage,
@@ -69,5 +75,5 @@ void loadData(char fname[])
                dataArray[j].frequency,
                dataArray[j].power_factor,
                dataArray[j].thd_percent);
-    } */
+    }*/
 }
