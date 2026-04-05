@@ -66,13 +66,13 @@ WaveformData* loadData(char fname[])
     //Print out structure for debugging
     for (int j = 0;j < count; j++) {
         printf("%f %f %f %f %f %f %f %f\n",
-               dataArray->timestamp[j],
-               dataArray->phase_a_voltage[j],
-               dataArray->phase_b_voltage[j],
-               dataArray->phase_c_voltage[j],
-               dataArray->line_current[j],
-               dataArray->frequency[j],
-               dataArray->power_factor[j],
-               dataArray->thd_percent[j]);
+               *dataArray->timestamp[j],
+               *dataArray->phase_a_voltage[j],
+               *dataArray->phase_b_voltage[j],
+               *dataArray->phase_c_voltage[j],
+               *dataArray->line_current[j],
+               *dataArray->frequency[j],
+               *dataArray->power_factor[j],
+               *dataArray->thd_percent[j]);
     }
 }
