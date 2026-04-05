@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "../include/io.h"
+#include "../include/waveform.h"
 
 int main(void)
 {
@@ -24,7 +25,7 @@ int main(void)
 
         printf("Press any key to continue...      ('99' to exit)\n");
         fgets(choice, 3, stdin);
-        if (strcmp(choice, "99") == 0) /*Exit condition*/
+        if (strcmp(choice, "99") == 0) /*Exit condition TODO: HANDLE FOR NO INPUT */
         {
             exit = true;
         }

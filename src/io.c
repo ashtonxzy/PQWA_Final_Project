@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-void loadData(char fname[])
+WaveformData* loadData(char fname[])
 {
     /*--------------OPENING FILE--------------*/
     FILE *csvFile = fopen(fname, "r"); /*Open user specified file*/
@@ -12,7 +12,6 @@ void loadData(char fname[])
         perror("Can't open file"); /*Gives error feedback*/
         exit(1);
     }
-
 
 
     /*--------------CREATE STRUCTURE AND ALLOCATE MEMORY--------------*/
@@ -29,7 +28,6 @@ void loadData(char fname[])
     WaveformData *dataArray = malloc(sizeof(WaveformData) * rowCount); /*Structure to store each line from csv*/
 
 
-
     /*--------------STORE CONTENTS IN STRUCTURE--------------*/
 
     //TODO: CHANGE ARRAY INDEXING FOR POINTER PARSING
@@ -40,19 +38,19 @@ void loadData(char fname[])
         line[strcspn(line, "\n")] = '\0'; /*Removes new line after rows*/
         const char *token = strtok(line, ","); /*Pointer for where csv data should be split*/
         int col = 0; /*Count columns for structures*/
-        while (token != NULL) /*Count skips first line*/
+        while (token != NULL)
         {
             switch (col) //Case for each column
             {
                 //Store data in each variable in the structure
-                case 0: dataArray[count].timestamp = atof(token); break;;
-                case 1: dataArray[count].phase_a_voltage = atof(token); break;
-                case 2: dataArray[count].phase_b_voltage= atof(token); break;
-                case 3: dataArray[count].phase_c_voltage = atof(token); break;
-                case 4: dataArray[count].line_current = atof(token); break;
-                case 5: dataArray[count].frequency = atof(token); break;
-                case 6: dataArray[count].power_factor = atof(token); break;
-                case 7: dataArray[count].thd_percent = atof(token); break;
+                case 0: dataArray->timestamp[count] = atof(token); break;
+                case 1: dataArray->phase_a_voltage[count] = atof(token); break;
+                case 2: dataArray->phase_b_voltage[count] = atof(token); break;
+                case 3: dataArray->phase_c_voltage[count] = atof(token); break;
+                case 4: dataArray->line_current[count] = atof(token); break;
+                case 5: dataArray->frequency[count] = atof(token); break;
+                case 6: dataArray->power_factor[count] = atof(token); break;
+                case 7: dataArray->thd_percent[count] = atof(token); break;
                 default: ;
             }
             token = strtok(NULL, ",");
@@ -60,20 +58,21 @@ void loadData(char fname[])
         }
         count++;
     }
+
     fclose(csvFile); /*Close the file */
-    free(dataArray); /*Free the allocated memory*/
+  //  return dataArray;
 
 
     //Print out structure for debugging
-/*; j < count; j++) {
+    for (int j = 0;j < count; j++) {
         printf("%f %f %f %f %f %f %f %f\n",
-               dataArray[j].timestamp,
-               dataArray[j].phase_a_voltage,
-               dataArray[j].phase_b_voltage,
-               dataArray[j].phase_c_voltage,
-               dataArray[j].line_current,
-               dataArray[j].frequency,
-               dataArray[j].power_factor,
-               dataArray[j].thd_percent);
-    }*/
+               dataArray->timestamp[j],
+               dataArray->phase_a_voltage[j],
+               dataArray->phase_b_voltage[j],
+               dataArray->phase_c_voltage[j],
+               dataArray->line_current[j],
+               dataArray->frequency[j],
+               dataArray->power_factor[j],
+               dataArray->thd_percent[j]);
+    }
 }
