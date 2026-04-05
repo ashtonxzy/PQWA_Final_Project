@@ -10,8 +10,7 @@ int main(void)
     char choice[2] = "w";
     bool exit = false;
 
-    do
-    {
+    do{
         /* --------------MENU-------------- */
         printf("-----------------------------------------------------------------\n");
         printf(" ____                ___            __        __          \n"
@@ -25,12 +24,10 @@ int main(void)
 
         printf("Press any key to continue...      ('99' to exit)\n");
         fgets(choice, 3, stdin);
-        if (strcmp(choice, "99") == 0) /*Exit condition TODO: HANDLE FOR NO INPUT */
-        {
+        if (strcmp(choice, "99") == 0){ /*Exit condition TODO: HANDLE FOR NO INPUT */
             exit = true;
         }
-        else
-        {
+        else{
             char fname[256] = "";
             /*--------------FILE HANDLING--------------*/
             printf("Please enter file location:\n");
@@ -38,10 +35,9 @@ int main(void)
             fgets(fname, 100, stdin);
             fname[strcspn(fname, "\n")] = 0; /*Removes \n from end of string*/
             printf("Opening file: %s\n", fname); /*Debug to check if right file is being opened - was having issues*/
-            loadData(fname);
-
+            WaveformData *data = loadData(fname);
+            WaveFormCalculations(data);
         }
-
     } while (exit == false);
     return 0;
 }
