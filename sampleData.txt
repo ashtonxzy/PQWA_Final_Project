@@ -1,0 +1,5 @@
+Phase  ||  RMS  ||  Peak to Peak || DC Offset  ||  Tolerance Compliant  ||  Clipping
+----------------------------------------------------------------------
+  A      229.81       650.00         -0.00             Compliant             Clipping 
+  B      229.81       649.86         0.00             Compliant             Clipping 
+  C      229.81       649.86         -0.00             Compliant             Clipping 
