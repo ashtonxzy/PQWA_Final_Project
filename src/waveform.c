@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include "/Users/ashton/Documents/GitHub/PQWA_Final_Project/include/io.h"
 #include <math.h>
+#include <stdbool.h>
+#include <stdlib.h>
 
 double RMS(double *vol, int size)
 {
@@ -44,9 +46,15 @@ double DCOffset(double *vol, int size)
     return mean;
 }
 
-double detectClipping(double *vol, int size)
+bool detectClipping(double *vol, int size)
 {
-
+    double *ptr = vol;
+    for (int i = 0; i < size; i++){
+        if (abs(ptr[i] >= 324.9)){
+            return true;
+        }
+    }
+    return false;
 }
 
 void WaveFormCalculations(WaveformData *dataArray)
@@ -63,16 +71,37 @@ void WaveFormCalculations(WaveformData *dataArray)
     double phaseBoffset = DCOffset(dataArray->phase_b_voltage, dataArray->size);
     double phaseCoffset = DCOffset(dataArray->phase_c_voltage, dataArray->size);
 
-    printf("RMS Phase A: %f V \n", phaseArms);
-    printf("RMS Phase B: %f V \n", phaseBrms);
-    printf("RMS Phase C: %f V \n", phaseCrms);
+    double tolerance = 0.1;
+    double expectedValue = 230;
+    double lower = expectedValue * (1.0 - tolerance);
+    double higher = expectedValue * (1.0 + tolerance);
 
-    printf("Phase A peak to peak: %f V \n", phaseApeak);
-    printf("Phase B peak to peak: %f V \n", phaseBpeak);
-    printf("Phase C peak to peak: %f V \n", phaseCpeak);
+    bool phaseAcompliance = true;
+    bool phaseBcompliance = true;
+    bool phaseCcompliance = true;
 
-    printf("Phase A DC Offset: %f V \n", phaseAoffset);
-    printf("Phase B DC Offset: %f V \n", phaseBoffset);
-    printf("Phase C DC Offset: %f V \n", phaseCoffset);
+    bool phaseAclipping = detectClipping(dataArray->phase_a_voltage, dataArray->size);
+    bool phaseBclipping = detectClipping(dataArray->phase_b_voltage, dataArray->size);
+    bool phaseCclipping = detectClipping(dataArray->phase_c_voltage, dataArray->size);
+
+    if (phaseArms < lower && phaseArms > higher) phaseAcompliance = false;
+    if (phaseBrms < lower && phaseBrms > higher) phaseBcompliance = false;
+    if (phaseCrms < lower && phaseCrms > higher)  phaseCcompliance = false;
+
+    FILE *fptr;
+    fptr = fopen("sampleData.txt", "w");
+    fprintf(fptr, "Phase  ||  RMS  ||  Peak to Peak || DC Offset  ||  Tolerance Compliant  ||  Clipping\n");
+    fprintf(fptr, "----------------------------------------------------------------------\n");
+    fprintf(fptr, "  A      %.2f       %.2f         %.2f             %s             %s \n", phaseArms, phaseApeak, phaseAoffset,
+                                                                                    phaseAcompliance ? "Compliant" : "Non-compliant",
+                                                                                    phaseAclipping ? "Clipping" : "OK");
+    fprintf(fptr, "  B      %.2f       %.2f         %.2f             %s             %s \n", phaseBrms, phaseBpeak, phaseBoffset,
+                                                                                    phaseBcompliance ? "Compliant" : "OK",
+                                                                                    phaseBclipping ? "Clipping" : "No clipping");
+    fprintf(fptr, "  C      %.2f       %.2f         %.2f             %s             %s \n", phaseCrms, phaseCpeak, phaseCoffset,
+                                                                                    phaseCcompliance ? "Compliant" : "Non-compliant",
+                                                                                    phaseCclipping ? "Clipping" : "OK");
+
+    fclose(fptr);
 }
 

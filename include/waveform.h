@@ -15,7 +15,7 @@ double DCOffset(double *vol, int size);
 
 double PeakToPeak(double *vol, int size);
 
-double detectClipping(double *vol, int size);
+bool detectClipping(double *vol, int size);
 
-
+double ReturnData(double *vol, int size);
 #endif //PQWA_FINAL_PROJECT_WAVEFORM_H
