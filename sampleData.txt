@@ -3,3 +3,9 @@ Phase  ||  RMS  ||  Peak to Peak || DC Offset  ||  Tolerance Compliant  ||  Clip
   A      229.81       650.00         -0.00             Compliant             Clipping 
   B      229.81       649.86         0.00             Compliant             Clipping 
   C      229.81       649.86         -0.00             Compliant             Clipping 
+======================================================================
+Phase ||  Variance ||  Std Dev  
+----------------------------------------------------------------------
+  A       52812.50     229.81 
+  B       52812.50     229.81 
+  C       52812.50     229.81 

@@ -1,5 +1,6 @@
 #include <stdbool.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include "../include/io.h"
 #include "../include/waveform.h"
@@ -7,7 +8,7 @@
 int main(void)
 {
     /* --------------VARIABLES-------------- */
-    char choice[2] = "w";
+    char fname[256] = "";
     bool exit = false;
 
     do{
@@ -21,23 +22,32 @@ int main(void)
         printf("V1.0                                              By Ashton Crane\n ");
         printf("-----------------------------------------------------------------\n");
         printf("\n");
-
-        printf("Press any key to continue...      ('99' to exit)\n");
-        fgets(choice, 3, stdin);
-        if (strcmp(choice, "99") == 0){ /*Exit condition TODO: HANDLE FOR NO INPUT */
+        printf("('99' to exit)\n");
+        printf("Please enter file location:\n");
+        printf(">>");
+        fgets(fname, sizeof(fname), stdin);
+        fname[strcspn(fname, "\n")] = 0;
+        if (strcmp(fname, "99") == 0) //Exit case
+        {
             exit = true;
+            continue;
         }
-        else{
-            char fname[256] = "";
-            /*--------------FILE HANDLING--------------*/
-            printf("Please enter file location:\n");
-            printf(">>");
-            fgets(fname, 100, stdin);
-            fname[strcspn(fname, "\n")] = 0; /*Removes \n from end of string*/
-            printf("Opening file: %s\n", fname); /*Debug to check if right file is being opened - was having issues*/
-            WaveformData *data = loadData(fname);
-            WaveFormCalculations(data);
+        if (strcmp(fname, "") == 0) //Nothing entered case
+        {
+            printf("No valid file entered.");
+            continue;
         }
+
+
+        /*--------------FILE HANDLING--------------*/
+        fname[strcspn(fname, "\n")] = 0;/*Removes \n from end of string*/
+        printf("Opening file: %s\n", fname); /*Debug to check if right file is being opened - was having issues*/
+        WaveformData *data = LoadData(fname);
+        WaveFormCalculations(data);
+        free(data);
+
+
+
     } while (exit == false);
     return 0;
 }

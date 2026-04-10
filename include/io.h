@@ -14,7 +14,7 @@ typedef struct
     double thd_percent[1000];
 }WaveformData;
 
-WaveformData* loadData(char fname[]);
+WaveformData* LoadData(char fname[]);
 
 
 #endif //PQWA_FINAL_PROJECT_IO_H

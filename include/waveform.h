@@ -11,11 +11,12 @@ void WaveFormCalculations(WaveformData* dataArray);
 
 double RMS(double *vol, int size);
 
-double DCOffset(double *vol, int size);
-
 double PeakToPeak(double *vol, int size);
 
-bool detectClipping(double *vol, int size);
+bool DetectClipping(double *vol, int size);
 
-double ReturnData(double *vol, int size);
+double VarianceCalc(double *vol, int size);
+
+double Mean(double *vol, int size);
+
 #endif //PQWA_FINAL_PROJECT_WAVEFORM_H
